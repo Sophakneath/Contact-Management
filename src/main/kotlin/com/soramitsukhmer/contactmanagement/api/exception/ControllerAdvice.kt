@@ -17,7 +17,7 @@ class ControllerAdvice {
     @ExceptionHandler(FieldNotFoundException::class)
     fun iDNotFoundException(request: HttpServletRequest, e: FieldNotFoundException?) : ResponseEntity<ErrorResponse>{
         log.error("IDNotFoundException: $e")
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(errorMessage = e?.message + " Is Not found"))
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(errorMessage = String.format(ErrorCode.ID_NOT_FOUND.message, e?.message.toString())))
     }
 
     @ExceptionHandler(ChildFoundException::class)
