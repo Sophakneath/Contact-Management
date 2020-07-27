@@ -47,6 +47,7 @@ class StaffServiceTest {
         val createdStaff = staffService.createStaff(validStaff)
         assertNotNull("Staff is created", createdStaff.id)
         staffService.deleteStaff(createdStaff.id)
+        companyService.deleteCompany(company.id)
     }
 
     @Test
@@ -62,6 +63,7 @@ class StaffServiceTest {
         val staff = staffService.updateStaff(createdStaff.id, updatedStaff)
         assertNotEquals("New name and old name is not the same", createdStaff.name, staff.name)
         staffService.deleteStaff(createdStaff.id)
+        companyService.deleteCompany(company.id)
     }
 
     @Test
@@ -81,6 +83,8 @@ class StaffServiceTest {
         assertEquals("Get all staffs successfully", allStaffs.pagination.totalElements.toInt(),staffs.size)
         for(value in listStaff)
             staffService.deleteStaff(value.id)
+
+        companyService.deleteCompany(company.id)
     }
 
     @Test
@@ -94,6 +98,7 @@ class StaffServiceTest {
         val getStaff = staffService.getStaff(createdStaff.id)
         assertEquals("Get staff successfully", createdStaff.id, getStaff.id)
         staffService.deleteStaff(createdStaff.id)
+        companyService.deleteCompany(company.id)
     }
 
     @Test
@@ -108,5 +113,6 @@ class StaffServiceTest {
         val pageable: Pageable = PageRequest.of(0,10, Sort.by("name").descending())
         val staffs = staffService.listAllStaffs(null, pageable)
         assertFalse("Delete staff successfully", staffs.content.contains(createdStaff))
+        companyService.deleteCompany(company.id)
     }
 }
