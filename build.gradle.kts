@@ -26,6 +26,9 @@ dependencies {
 	implementation("com.oracle.ojdbc:ojdbc8:19.3.0.0")
 	runtimeOnly("com.h2database:h2")
 	implementation ("com.github.javafaker:javafaker:1.0.2")
+
+	implementation("org.liquibase:liquibase-core")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}

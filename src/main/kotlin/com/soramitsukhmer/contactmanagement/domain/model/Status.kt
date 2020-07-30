@@ -7,10 +7,11 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Table(name = "Status")
+@Table(name = "status")
 data class Status(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqStatus")
+    @SequenceGenerator(name = "seqStatus", sequenceName = "SEQ_STATUS", initialValue = 3)
     @Column(name = "id")
     var id:Long = 0,
     @Column(name = "name")

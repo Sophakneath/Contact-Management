@@ -1,0 +1,16 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="neath" id="seed-table-status">
+        <insert tableName="status">
+            <column name="id" value="1"></column>
+            <column name="name" value="Active"></column>
+        </insert>
+        <insert tableName="status">
+            <column name="id" value="2"></column>
+            <column name="name" value="Inactive"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

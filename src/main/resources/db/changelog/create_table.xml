@@ -1,0 +1,89 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="sequences" author="neath">
+        <createSequence sequenceName="SEQ_STATUS" startValue="3" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_COMPANY" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_STAFF" startValue="1" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet author="neath" id="create-table-status">
+        <createTable tableName="status">
+            <column name="id" type="NUMBER(19,0)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="neath" id="create-table-companies">
+        <createTable tableName="companies">
+            <column name="id" type="NUMBER(19,0)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="web_url" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="private_pass_phrase" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_id" type="NUMBER(19,0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="neath" id="create-table-staffs">
+        <createTable tableName="staffs">
+            <column name="id" type="NUMBER(19,0)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="position" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="company_id" type="NUMBER(19,0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_id" type="NUMBER(19,0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(6)"/>
+            <column name="updated_at" type="TIMESTAMP(6)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-foreign-key" author="neath">
+        <addForeignKeyConstraint baseTableName="companies" baseColumnNames="status_id" constraintName="fk_company_status_id"
+                                 referencedTableName="status"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="staffs" baseColumnNames="company_id" constraintName="fk_comapny_staff_id"
+                                 referencedTableName="companies"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="staffs" baseColumnNames="status_id" constraintName="fk_staff_status_id"
+                                 referencedTableName="status"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

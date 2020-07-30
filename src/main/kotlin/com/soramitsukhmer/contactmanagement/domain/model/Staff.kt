@@ -10,7 +10,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "staffs")
 data class Staff(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqStaff")
+        @SequenceGenerator(name = "seqStaff", sequenceName = "SEQ_STAFF", initialValue = 1)
         val id : Long = 0,
         @Column(name = "name")
         var name: String,

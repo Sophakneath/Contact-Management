@@ -95,7 +95,7 @@ class CompanyService(
         if(staff.isEmpty()) companyRepository.delete(company)
         else throw ChildFoundException("Delete can't be perform because company has staffs.")
 
-        return "DELETED"
+        return "Deleted"
     }
 }
 
